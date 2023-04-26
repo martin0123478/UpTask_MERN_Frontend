@@ -18,6 +18,25 @@ const handleSubmit = e =>{
     })
     return
   }
+  if(password != repetiPassword){
+      setAlerta({
+      msg:'Los passwords no son iguales',
+      error:true
+    })
+    return
+  }
+
+  if(password.length < 6){
+      setAlerta({
+      msg:'El password es muy corto, el minimo es de 6 caracteres',
+      error:true
+    })
+    return
+  }
+  setAlerta({})
+
+  //Crear el usuario en la API
+  console.log('creando')
 }
 
 const {msg} = alerta

@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import Alerta from '../components/Alerta'
-
+import axios from 'axios'
 const Registrar = () => {
   const [nombre,setNombre] = useState('')
   const [email,setEmail] = useState('')
@@ -9,7 +9,7 @@ const Registrar = () => {
   const [repetiPassword,setRepetirPassword] = useState('')
   const [alerta,setAlerta] = useState({})
 
-const handleSubmit = e =>{
+const handleSubmit  = async e =>{
   e.preventDefault()
   if([nombre,email,password,repetiPassword].includes('')){
     setAlerta({
@@ -36,7 +36,12 @@ const handleSubmit = e =>{
   setAlerta({})
 
   //Crear el usuario en la API
-  console.log('creando')
+  try {
+    const respuesta =await axios.post('http://localhost:4000/api/usuarios',{nombre,password,email})
+    console.log(respuesta)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const {msg} = alerta

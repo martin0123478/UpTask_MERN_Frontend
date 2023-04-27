@@ -42,11 +42,17 @@ const handleSubmit  = async e =>{
       msg:data.msg,
       error:false
     })
+    setNombre('')
+    setEmail('')
+    setPassword('')
+    setRepetirPassword('')
   } catch (error) {
     setAlerta({
       msg:error.response.data.msg,
       error:true
     })
+    
+    
   }
 }
 

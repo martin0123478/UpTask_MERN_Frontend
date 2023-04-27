@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react'
 import { useParams,Link } from 'react-router-dom'
 import axios from 'axios'
-import Alerta from '../components/Alerta'
+import Alerta from '../components/Alerta.jsx'
 
 const ConfirmarCuenta = () => {
   const [alerta,setAlerta] = useState({})

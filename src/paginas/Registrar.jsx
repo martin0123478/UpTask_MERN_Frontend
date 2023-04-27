@@ -37,10 +37,16 @@ const handleSubmit  = async e =>{
 
   //Crear el usuario en la API
   try {
-    const respuesta =await axios.post('http://localhost:4000/api/usuarios',{nombre,password,email})
-    console.log(respuesta)
+    const {data} =await axios.post('http://localhost:4000/api/usuarios',{nombre,password,email})
+    setAlerta({
+      msg:data.msg,
+      error:false
+    })
   } catch (error) {
-    console.log(error)
+    setAlerta({
+      msg:error.response.data.msg,
+      error:true
+    })
   }
 }
 

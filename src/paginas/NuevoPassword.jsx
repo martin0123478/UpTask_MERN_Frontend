@@ -1,5 +1,23 @@
-
+import { useState,useEffect } from "react"
+import { Link,useParams } from "react-router-dom"
+import axios from "axios"
+import Alerta from "../components/Alerta"
 const NuevoPassword = () => {
+  const params = useParams()
+  const {token} = params
+
+  useEffect(()=>{
+    const comprobarToken = async () =>{
+      try {
+      const {data} =   await axios(`http://localhost:4000/api/usuarios/olvide-password/${token}`)
+      console.log(data)
+      } catch (error) {
+        console.log(error.response)
+      }
+      
+    }
+    comprobarToken()
+  },[])
   return (
    <>
    <h1 className="text-sky-600 font-black text-6xl capitalize">Restablece tu passwor y no pierdas acceso a tus

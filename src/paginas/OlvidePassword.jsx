@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import Alerta from '../components/Alerta'
+import axios from "axios"
 const OlvidePassword = () => {
   const [email,setEmail] = useState('')
   const [alerta,setAlerta] = useState({})
@@ -13,6 +14,18 @@ const OlvidePassword = () => {
       error:true
     })
     return
+  }
+  try {
+    const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/olvide-password`,{email})
+    setAlerta({
+      msg:data.msg,
+      error:false
+    })
+  } catch (error) {
+    setAlerta({
+      msg:error.response.data.msg,
+      error:true
+    })
   }
   }
 
@@ -35,7 +48,7 @@ const OlvidePassword = () => {
             id="email"
             placeholder="Email de registro"
             value={email}
-            onChange={e => e.target.value}
+            onChange={e =>setEmail(e.target.value) }
             className="w-full mt-3 p-3 border rounded-xl bg-gray-50"/>
         </div>
 

@@ -6,6 +6,7 @@ import OlvidePassword from './paginas/OlvidePassword'
 import NuevoPassword from './paginas/NuevoPassword'
 import ConfirmarCuenta from './paginas/ConfirmarCuenta'
 import {AuthProvider} from './context/AuthProvider'
+import {ProyectoProvider} from './context/ProyectoProvider'
 import RutaProtegida from './layouts/RutaProtegida'
 import Proyectos from './paginas/Proyectos'
 import NuevoProyecto from './paginas/NuevoProyecto'
@@ -16,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
     <AuthProvider>
+      <ProyectoProvider>
     <Routes>
       <Route path='/' element={<AuthLayout/>}>
       <Route index element={<Login/>}/>
@@ -31,6 +33,7 @@ function App() {
 
       </Route>
     </Routes>
+    </ProyectoProvider>
     </AuthProvider>
     </BrowserRouter>
   )

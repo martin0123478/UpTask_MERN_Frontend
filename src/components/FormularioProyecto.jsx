@@ -3,15 +3,15 @@ import useProyectos from '../hooks/useProyectos'
 import Alerta from './Alerta'
 const FormularioProyecto = () => {
     const [nombre,setNombre] = useState('')
-    const [descripcion,setDesacripcion] = useState('')
+    const [description,setDesacripcion] = useState('')
     const [fechaEntrega,setFechaEntrega] = useState('')
     const [cliente,setCliente] = useState('')
 
     const {mostrarAlerta,alerta,submitProyecto} = useProyectos()
 
-    const handleSubmit = e =>{
+    const handleSubmit =async e =>{
         e.preventDefault()
-        if([nombre,descripcion,fechaEntrega,cliente].includes('')){
+        if([nombre,description,fechaEntrega,cliente].includes('')){
             mostrarAlerta({
                 msg:'Todos los campos son obligatorios',
                 error:true
@@ -19,7 +19,12 @@ const FormularioProyecto = () => {
         }
 
         //PASAR PROYECTOS A PROVIDER
-        submitProyecto({nombre,descripcion,fechaEntrega,cliente})
+       await submitProyecto({nombre,description,fechaEntrega,cliente})
+       setNombre('')
+       setDesacripcion('')
+       setFechaEntrega('')
+       setCliente('')
+
     }
 
     const {msg} = alerta
@@ -52,7 +57,7 @@ const FormularioProyecto = () => {
             
             className='border w-full p-2 mt-2 placeholder-gray-400 rounded-md'
             placeholder='Descripción del Proyecto'
-            value={descripcion}
+            value={description}
             onChange={e => setDesacripcion(e.target.value)}
             />
         </div>

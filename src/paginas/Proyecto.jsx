@@ -4,17 +4,28 @@ import { useEffect } from "react"
 
 
 const Proyecto = () => {
-    const {obtenerProyecto} = useProyectos()
+    const {obtenerProyecto,proyecto,cargando} = useProyectos()
     const params = useParams()
 
     useEffect(()=>{
         obtenerProyecto(params.id)
     },[])
-    
+    const {nombre} = proyecto
   return (
-    <div>
-      proyecto
+
+    cargando ? (
+        <button type="button" className="bg-indigo-500 ..." disabled>
+  <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+    
+  </svg>
+  Processing...
+</button>
+    ):(
+<div>
+      <h1 className="font-black text-4xl">{nombre}</h1>
     </div>
+    )
+    
   )
 }
 

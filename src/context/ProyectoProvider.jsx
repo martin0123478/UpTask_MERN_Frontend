@@ -7,6 +7,8 @@ const ProyectoContext = createContext()
 const ProyectoProvider = ({children}) =>{
     const [proyectos,setProyectos] = useState([])
     const [alerta,setAlerta] = useState({})
+    const [proyecto,setProyecto] = useState({})
+    const [cargando,setCargando] = useState(false)
 
     const navigate = useNavigate()
 
@@ -65,6 +67,7 @@ const ProyectoProvider = ({children}) =>{
     }
 
     const obtenerProyecto = async id =>{
+        setCargando(true)
         try {
             const token = localStorage.getItem('token')
             if(!token) return
@@ -76,9 +79,11 @@ const ProyectoProvider = ({children}) =>{
             }
 
             const {data} = await clienteAxios(`/proyectos/${id}`,config)
-            console.log(data)
+            setProyecto(data)
         } catch (error) {
             console.log(error)
+        }finally{
+            setCargando(false)
         }
     }
     return(
@@ -88,7 +93,9 @@ const ProyectoProvider = ({children}) =>{
             mostrarAlerta,
             alerta,
             submitProyecto,
-            obtenerProyecto
+            obtenerProyecto,
+            proyecto,
+            cargando
         }}
         >
             {children}

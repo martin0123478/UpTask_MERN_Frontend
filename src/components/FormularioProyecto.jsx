@@ -35,7 +35,8 @@ const FormularioProyecto = () => {
         }
 
         //PASAR PROYECTOS A PROVIDER
-       await submitProyecto({nombre,description,fechaEntrega,cliente})
+       await submitProyecto({id,nombre,description,fechaEntrega,cliente})
+       setId(null)
        setNombre('')
        setDesacripcion('')
        setFechaEntrega('')

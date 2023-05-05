@@ -9,6 +9,7 @@ const ProyectoProvider = ({children}) =>{
     const [alerta,setAlerta] = useState({})
     const [proyecto,setProyecto] = useState({})
     const [cargando,setCargando] = useState(false)
+    const [modalFormularioTareas,setModalFormularioTareas] = useState(false)
 
     const navigate = useNavigate()
 
@@ -38,6 +39,10 @@ const ProyectoProvider = ({children}) =>{
         setTimeout(() => {
             setAlerta({})
         }, 5000);
+    }
+
+    const handleModalTarea = () =>{
+        setModalFormularioTareas(!modalFormularioTareas)
     }
 
     const submitProyecto = async proyecto =>{
@@ -164,7 +169,9 @@ const ProyectoProvider = ({children}) =>{
             obtenerProyecto,
             proyecto,
             cargando,
-            eliminarProyecto
+            eliminarProyecto,
+            modalFormularioTareas,
+            handleModalTarea
         }}
         >
             {children}

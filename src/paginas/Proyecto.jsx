@@ -3,7 +3,7 @@ import useProyectos from "../hooks/useProyectos"
 import { useEffect, useState } from "react"
 import ModalFormularioTareas from "../components/ModalFormularioTareas"
 const Proyecto = () => {
-    const {obtenerProyecto,proyecto,cargando} = useProyectos()
+    const {obtenerProyecto,proyecto,cargando,handleModalTarea} = useProyectos()
     const params = useParams()
     const [modal,setModal] = useState(false)
 
@@ -32,7 +32,7 @@ if(cargando) return(
      </div>
 
       <button
-      onClick={() => setModal(true)}
+      onClick={handleModalTarea}
        type="button" className="text-sm px-5 py-3 w-full md:w-auto rounded-lg uppercase font-bold bg-sky-400
       text-white text-center mt-5 flex gap-2 items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

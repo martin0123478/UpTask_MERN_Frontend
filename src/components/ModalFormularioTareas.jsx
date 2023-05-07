@@ -1,16 +1,29 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import useProyectos from '../hooks/useProyectos'
-
+import Alerta from './Alerta'
 const PRIORIDAD = ['Baja','Media','Alta']
 const ModalFormularioTarea = () => {
 
-    const {modalFormularioTareas,handleModalTarea} = useProyectos()
+    const {modalFormularioTareas,handleModalTarea,mostrarAlerta,alerta,submitTarea} = useProyectos()
     const [nombre,setNombre] = useState('')
     const [descripcion,setDescripcion] = useState('')
     const [prioridad,setPrioridad] = useState('')
  
-    return (
+    const handleSubmit = e =>{
+        e.preventDefault()
+        if([nombre,descripcion,prioridad].includes('')){
+            mostrarAlerta({
+                msg:'Todos los campos son obligatorios',
+                error:true
+            })
+            return
+        }
+        submitTarea({nombre,descripcion,prioridad})
+    }
+
+    const {msg} = alerta
+     return (
         <Transition.Root show={ modalFormularioTareas } as={Fragment}>
             <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={handleModalTarea }>
                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -63,7 +76,9 @@ const ModalFormularioTarea = () => {
                                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                                     <Dialog.Title as="h3" className="text-lg leading-6 font-bold text-gray-900">
                                         Crear Tarea
-                                        <form className='my-10'>
+
+                                        {msg && <Alerta alerta={alerta}/>}
+                                        <form className='my-10' onSubmit={handleSubmit}>
                                             <div className='mb-5'>
                                                 <label className='text-gray-700 uppercase font-bold text-sm'
                                                 htmlFor='nombre'>

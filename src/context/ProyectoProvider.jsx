@@ -159,6 +159,10 @@ const ProyectoProvider = ({children}) =>{
        }
     }
 
+    const submitTarea = async tarea =>{
+        console.log(tarea)
+    }
+
     return(
         <ProyectoContext.Provider
         value={{
@@ -171,7 +175,8 @@ const ProyectoProvider = ({children}) =>{
             cargando,
             eliminarProyecto,
             modalFormularioTareas,
-            handleModalTarea
+            handleModalTarea,
+            submitTarea
         }}
         >
             {children}

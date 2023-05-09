@@ -6,13 +6,16 @@ import { useParams } from 'react-router-dom'
 const PRIORIDAD = ['Baja','Media','Alta']
 const ModalFormularioTarea = () => {
 
-    const {modalFormularioTareas,handleModalTarea,mostrarAlerta,alerta,submitTarea} = useProyectos()
+    const {modalFormularioTareas,handleModalTarea,mostrarAlerta,alerta,submitTarea,tarea} = useProyectos()
     const [nombre,setNombre] = useState('')
     const [descripcion,setDescripcion] = useState('')
     const [fechaEntrega,setFechaEntrega] = useState('')
     const [prioridad,setPrioridad] = useState('')
 
     const params = useParams()
+    useEffect(()=>{
+        console.log(tarea)
+    },[tarea])
     
  
     const handleSubmit =async e =>{

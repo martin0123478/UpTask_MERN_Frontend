@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import ModalFormularioTareas from "../components/ModalFormularioTareas"
 import ModalEliminarTarea from "../components/ModalEliminarTarea"
 import Tarea from "../components/Tarea"
+import Alerta from "../components/Alerta"
 const Proyecto = () => {
-    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar} = useProyectos()
+    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta} = useProyectos()
     const params = useParams()
    
 
@@ -22,6 +23,8 @@ if(cargando) return(
   Processing...
 </button>
 )
+
+const {msg} = alerta
   return (
     <> 
   <div className="flex justify-between">
@@ -47,6 +50,14 @@ if(cargando) return(
         Nueva Tarea</button>
 
         <p className="font-bold text-xl mt-10">Tareas de Proyecto</p>
+        <div className="flex justify-center">
+
+          <div className="md:w-1/3 lg:w-1/4">
+             {msg && <Alerta alerta={alerta}/>}
+          </div>
+
+        </div>
+       
         <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? 
         proyecto.tareas.map(tarea =>(

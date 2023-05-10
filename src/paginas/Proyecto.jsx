@@ -2,11 +2,12 @@ import { useParams,Link } from "react-router-dom"
 import useProyectos from "../hooks/useProyectos"
 import { useEffect, useState } from "react"
 import ModalFormularioTareas from "../components/ModalFormularioTareas"
+import ModalEliminarTarea from "../components/ModalEliminarTarea"
 import Tarea from "../components/Tarea"
 const Proyecto = () => {
-    const {obtenerProyecto,proyecto,cargando,handleModalTarea} = useProyectos()
+    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar} = useProyectos()
     const params = useParams()
-    const [modal,setModal] = useState(false)
+   
 
     useEffect(()=>{
         obtenerProyecto(params.id)
@@ -57,8 +58,10 @@ if(cargando) return(
         </div>
 
         <ModalFormularioTareas
-         modal={modal}
-         setModal={setModal}
+         
+        />
+
+        <ModalEliminarTarea
         />
    
     

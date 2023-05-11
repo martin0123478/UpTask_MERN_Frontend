@@ -3,8 +3,10 @@ import useProyectos from "../hooks/useProyectos"
 import { useEffect, useState } from "react"
 import ModalFormularioTareas from "../components/ModalFormularioTareas"
 import ModalEliminarTarea from "../components/ModalEliminarTarea"
+import ModalEliminarColaborador from "../components/ModalEliminarColaborador"
 import Tarea from "../components/Tarea"
 import Alerta from "../components/Alerta"
+import Colaborador from "../components/Colaborador"
 const Proyecto = () => {
     const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta} = useProyectos()
     const params = useParams()
@@ -14,6 +16,7 @@ const Proyecto = () => {
         obtenerProyecto(params.id)
     },[])
     const {nombre} = proyecto
+  
     
 if(cargando) return(
         <button type="button" className="bg-indigo-500 ..." disabled>
@@ -76,6 +79,17 @@ const {msg} = alerta
             </Link>
         </div>
 
+            <div className="bg-white shadow mt-10 rounded-lg">
+        {proyecto.colaboradores?.length ? 
+        proyecto.colaboradores?.map(colaborador =>(
+          <Colaborador
+            key={colaborador._id}
+            colaborador={colaborador}
+          />
+        ))
+        :
+        <p className="text-center my-5 p-10">No hay colaboradores en este proyecto</p>}
+        </div>
 
         <ModalFormularioTareas
          
@@ -83,6 +97,7 @@ const {msg} = alerta
 
         <ModalEliminarTarea
         />
+        <ModalEliminarColaborador/>
    
     
     

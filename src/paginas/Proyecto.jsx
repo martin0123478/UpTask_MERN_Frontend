@@ -33,7 +33,6 @@ if(cargando) return(
 
 const {msg} = alerta
   return (
-    msg && alerta.error ? <Alerta alerta={alerta}/>:(
     <> 
   <div className="flex justify-between">
       <h1 className="font-black text-4xl">{nombre}</h1>
@@ -65,13 +64,7 @@ const {msg} = alerta
          )}
 
         <p className="font-bold text-xl mt-10">Tareas de Proyecto</p>
-        <div className="flex justify-center">
-
-          <div className="md:w-1/3 lg:w-1/4">
-             {msg && <Alerta alerta={alerta}/>}
-          </div>
-
-        </div>
+        
        
         <div className="bg-white shadow mt-10 rounded-lg">
         {proyecto.tareas?.length ? 
@@ -118,7 +111,7 @@ const {msg} = alerta
     
    </>
   )
-  )
+  
 }
 
 export default Proyecto

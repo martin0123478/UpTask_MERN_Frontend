@@ -14,7 +14,7 @@ const Proyecto = () => {
     const params = useParams()
     const admin = useAdmin()
     
-   
+   console.log(proyecto)
 
     useEffect(()=>{
         obtenerProyecto(params.id)

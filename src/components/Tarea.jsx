@@ -17,7 +17,7 @@ const Tarea = ({tarea}) => {
         rounded-lg text-white ">Completado por: {tarea.completado.nombre}</p>}
       </div>
     
-      <div className="flex gap-2">
+      <div className="flex flex-col lg:flex-row gap-2">
         {admin && (
 
         

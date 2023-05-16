@@ -1,6 +1,7 @@
 import {useState,useEffect,createContext} from 'react'
 import clienteAxios from '../config/clienteAxios'
 import { useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 import { io } from 'socket.io-client'
 const ProyectoContext = createContext()
 
@@ -21,6 +22,7 @@ const ProyectoProvider = ({children}) =>{
   
 
     const navigate = useNavigate()
+    const {auth} = useAuth()
 
     useEffect(()=>{
         const obtenerProyectos = async () =>{
@@ -45,7 +47,7 @@ const ProyectoProvider = ({children}) =>{
             }
         }
         obtenerProyectos()
-    },[])
+    },[auth])
 
     useEffect(()=>{
     socket = io(import.meta.env.VITE_BACKEND_URL)

@@ -11,7 +11,7 @@ import Colaborador from "../components/Colaborador"
 import io from 'socket.io-client'
 let socket
 const Proyecto = () => {
-    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta} = useProyectos()
+    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta,submitTareasProyectos} = useProyectos()
   
     const params = useParams()
     const admin = useAdmin()
@@ -29,8 +29,11 @@ const Proyecto = () => {
     },[])
 
     useEffect(()=>{
-      socket.on('respuesta',(persona)=>{
-        console.log(persona)
+      socket.on('tarea agragada',tareaNueva=>{
+        if(tareaNueva.proyecto === proyecto._id){
+           submitTareasProyectos(tareaNueva)
+        }
+       
       })
     })
   

@@ -266,9 +266,8 @@ const ProyectoProvider = ({children}) =>{
             }, 3000);
             setModalEliminarTarea(false)
             
-           const proyectoActualizado = {...proyecto}
-           proyectoActualizado.tareas = proyectoActualizado.tareas.filter(tareaState => tareaState._id!= tarea._id)
-           setProyecto(proyectoActualizado)
+          //socket
+          socket.emit('eliminar tarea',tarea)
            
         } catch (error) {
             console.log(error)
@@ -387,6 +386,12 @@ const ProyectoProvider = ({children}) =>{
             proyectoActualizado.tareas = [...proyectoActualizado.tareas,tarea]
             setProyecto(proyectoActualizado)
     }
+
+    const eliminarTareaProyecto = (tarea) =>{
+         const proyectoActualizado = {...proyecto}
+           proyectoActualizado.tareas = proyectoActualizado.tareas.filter(tareaState => tareaState._id!= tarea._id)
+           setProyecto(proyectoActualizado)
+    }
     return(
         <ProyectoContext.Provider
         value={{
@@ -415,7 +420,8 @@ const ProyectoProvider = ({children}) =>{
             completarTarea,
             buscador,
             handleBuscador,
-            submitTareasProyectos
+            submitTareasProyectos,
+            eliminarTareaProyecto
         }}
         >
             {children}

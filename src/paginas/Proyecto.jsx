@@ -8,18 +8,31 @@ import ModalEliminarColaborador from "../components/ModalEliminarColaborador"
 import Tarea from "../components/Tarea"
 import Alerta from "../components/Alerta"
 import Colaborador from "../components/Colaborador"
+import io from 'socket.io-client'
+let socket
 const Proyecto = () => {
     const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta} = useProyectos()
   
     const params = useParams()
     const admin = useAdmin()
     
-   console.log(proyecto)
+  
 
     useEffect(()=>{
         obtenerProyecto(params.id)
     },[])
     const {nombre} = proyecto
+
+    useEffect(()=>{
+      socket = io(import.meta.env.VITE_BACKEND_URL)
+      socket.emit('abrir proyecto',params.id)
+    },[])
+
+    useEffect(()=>{
+      socket.on('respuesta',(persona)=>{
+        console.log(persona)
+      })
+    })
   
     
 if(cargando) return(

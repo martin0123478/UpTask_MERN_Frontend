@@ -2,14 +2,11 @@ import { useEffect } from "react"
 import useProyectos from "../hooks/useProyectos"
 import PreviewProyecto from "../components/PreviewProyecto"
 import Alerta from "../components/Alerta"
-import io from 'socket.io-client'
-let socket
+
 const Proyectos = () => {
   const {proyectos,alerta} = useProyectos()
   const {msg} = alerta
-  useEffect(()=>{
-    socket = io(import.meta.env.VITE_BACKEND_URL)
-  },[])
+  
   return (
     <>
     <h1 className="text-4xl font-black ">Proyectos</h1>

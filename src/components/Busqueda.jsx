@@ -37,7 +37,7 @@ const Busqueda = () => {
                     leaveTo="opacity-0 scale-95"
                 >
                 <Combobox
-                onChange={(proyecto)=> (window.location.href= `/proyectos/${proyecto._id}`)}
+                onChange={(proyecto)=> (window.location= `/proyectos/${proyecto._id}`)}
                     as="div"
                     className="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all"
                 >

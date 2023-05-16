@@ -11,7 +11,7 @@ import Colaborador from "../components/Colaborador"
 import io from 'socket.io-client'
 let socket
 const Proyecto = () => {
-    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta,submitTareasProyectos,eliminarTareaProyecto} = useProyectos()
+    const {obtenerProyecto,proyecto,cargando,handleModalTarea,handleModalEliminar,alerta,submitTareasProyectos,eliminarTareaProyecto,actualizarTareaProyecto} = useProyectos()
   
     const params = useParams()
     const admin = useAdmin()
@@ -38,6 +38,11 @@ const Proyecto = () => {
       socket.on('tarea eliminada', tareaEliminada =>{
         if(tareaEliminada.proyecto === proyecto._id){
           eliminarTareaProyecto(tareaEliminada)
+        }
+      })
+      socket.on('tarea actualizada',tareaActualizada =>{
+        if(tareaActualizada.proyecto._id === proyecto._id){
+          actualizarTareaProyecto(tareaActualizada)
         }
       })
     })
